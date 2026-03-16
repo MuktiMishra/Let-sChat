@@ -1,21 +1,19 @@
 import mongoose from "mongoose";
-
-const connectDB = async()=>{
+const connectDB = async () => {
     const url = process.env.MONGO_URI;
-
-    if(!url){
+    if (!url) {
         throw new Error("MONGO_URI is not defined in environment variables");
     }
-    try{
-        await mongoose.connect(url , {
-            dbName : "Chatappmicroserviceapp",
+    try {
+        await mongoose.connect(url, {
+            dbName: "Chatappmicroserviceapp",
         });
-        console.log("Connected to MongoDB")
+        console.log("Connected to MongoDB");
     }
-    catch(error){
+    catch (error) {
         console.error("Failed to connect to mongoDB : ", error);
         process.exit(1);
     }
 };
-
 export default connectDB;
+//# sourceMappingURL=db.js.map
