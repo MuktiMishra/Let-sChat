@@ -3,13 +3,20 @@ import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import { createClient } from "redis";
 import userRoutes from './routes/user.js'
+import { connectRabbitMQ } from "./config/rabbitmq.js";
 
 dotenv.config();
 connectDB();
 
-export const redisClient = createClient({
-    url: process.env.REDIS_URL,
-});
+connectRabbitMQ();
+
+const redisUrl = process.env.REDIS_URL;
+
+if (!redisUrl) {
+  throw new Error("REDIS_URL missing");
+}
+
+export const redisClient = createClient({ url: redisUrl });
 
 redisClient.connect()
 .then(()=> console.log("Connected to redis"))
