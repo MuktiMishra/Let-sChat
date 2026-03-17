@@ -23,7 +23,8 @@ redisClient.connect()
 .catch(console.error);
 
 const app = express();
-app.use("api/v1", userRoutes);
+app.use(express.json());
+app.use("/api/v1", userRoutes);
 const port = 5000;
 
 
