@@ -53,7 +53,7 @@ export const getAllChats = TryCatch(async(req:AuthenticatedRequest , res)=>{
             seen: false,
         });
         try{
-            const {data}= await axios.get(`${process.env.USER_SERVICE}/api/v1/user`);\
+            const {data}= await axios.get(`${process.env.USER_SERVICE}/api/v1/user`);
             return  {
                 user: data,
                 chat:{
@@ -176,3 +176,69 @@ export const sendMessage = TryCatch(async(req:AuthenticatedRequest, res)=>{
 
 });
 
+export const getMessagesByChat = TryCatch(async (req: AuthenticatedRequest, res) => {
+    const userId = req.user?._id;
+    const { chatId } = req.params;
+
+    if (!userId) {
+        return res.status(401).json({
+            message: "Unauthorized",
+        });
+    }
+
+    if (!chatId) {
+        return res.status(400).json({
+            message: "ChatId Required",
+        });
+    }
+
+    const chat = await Chat.findById(chatId);
+
+    if (!chat) {
+        return res.status(404).json({
+            message: "Chat not found",
+        });
+    }
+
+    const isUserInChat = chat.users.some(
+        (id) => id.toString() === userId.toString()
+    );
+
+    if (!isUserInChat) {
+        return res.status(403).json({
+            message: "You are not a participant of this chat",
+        });
+    }
+
+    await Messages.updateMany(
+        {
+            chatId,
+            sender: { $ne: userId },
+            seen: false,
+        },
+        {
+            seen: true,
+            seenAt: new Date(),
+        }
+    );
+
+    const messages = await Messages.find({ chatId }).sort({ createdAt: -1 });
+
+    const otherUserId = chat.users.find(
+        (id) => id.toString() !== userId.toString()
+    );
+
+    try {
+        const { data } = await axios.get(`${process.env.USER_SERVICE}/api/v1/user`);
+
+        return res.json({
+            messages,
+            user: data,
+        });
+    } catch (error) {
+        return res.json({
+            messages,
+            user: { _id: otherUserId, name: "Unknown user.." },
+        });
+    }
+});
