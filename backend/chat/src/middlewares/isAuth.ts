@@ -1,6 +1,13 @@
 import type { NextFunction, Request, Response } from "express";
-import type { IUser } from "../model/User.js";
+
 import jwt, { type JwtPayload } from "jsonwebtoken";
+import type { Document, Types } from "mongoose";
+
+interface IUser extends Document {
+    _id: Types.ObjectId;
+    name: string;
+    email: string;
+}
 export interface AuthenticatedRequest extends Request{
     user?: IUser |  null;
 
@@ -40,3 +47,5 @@ export const isAuth = async(req:AuthenticatedRequest , res: Response , next:Next
         })
     }
 }
+
+export default isAuth;

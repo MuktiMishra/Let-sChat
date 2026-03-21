@@ -3,6 +3,17 @@
     "cors": "^2.8.6"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.19"
-  }
+    "@types/cors": "^2.8.19",
+    "concurrently": "^9.2.1"
+  },
+  "name": "letschat",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix backend/user\" \"npm run dev --prefix backend/mail\" \"npm run dev --prefix backend/chat\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
