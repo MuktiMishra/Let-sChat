@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Loading from '../components/LoadingComponent';
 import { useAppData } from '../context/AppContext';
+import toast from 'react-hot-toast';
 
 const LoginPage = () => {
   const [email , setEmail] = useState<string>("");
@@ -24,12 +25,12 @@ const LoginPage = () => {
       const {data} = await axios.post(`http://localhost:5000/api/v1/login` , {
         email,
       });
-      alert(data.message);
+      toast.success(data.message);
       router.push(`/verify?email=${email}`);
     }
     catch (error: any) {
       console.log(error);
-      alert(error?.response?.data?.message || "Something went wrong");
+      toast.error(error?.response?.data?.message || "Something went wrong");
     }
     finally{
       setLoading(false);

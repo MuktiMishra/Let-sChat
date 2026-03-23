@@ -20,6 +20,7 @@
     "axios": "^1.13.6",
     "cloudinary": "^1.41.3",
     "concurrently": "^9.2.1",
+    "cors": "^2.8.6",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
@@ -28,6 +29,7 @@
     "multer-storage-cloudinary": "^4.0.0"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
     "@types/dotenv": "^8.2.3",
     "@types/express": "^5.0.6"
   }
