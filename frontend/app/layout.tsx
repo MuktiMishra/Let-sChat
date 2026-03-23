@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import "./globals.css";
+import { AppProvider } from "./context/AppContext";
 
 export const metadata: Metadata = {
   title: "Create Chat App",
@@ -13,10 +14,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="en">
+      <body>
+        <AppProvider>{children}</AppProvider>
+      </body>
     </html>
   );
 }
