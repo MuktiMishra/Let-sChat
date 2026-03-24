@@ -23,10 +23,10 @@ export interface Message{
 
 const ChatApp = () => {
   const {loading, isAuth, logoutUser, chats , user: loggedInUser , users, fetchChats, setChats} = useAppData();
-
+  
   const [selectedUser , setSelectedUser] = useState<string | null>(null);
   const [message , setMessage]= useState("");
-  const [sidebarOpen , setSideOpen]= useState(false);
+  const [sidebarOpen , setSidebarOpen]= useState(false);
   const [messages , setMessages]= useState<Message[] | null>(null);
   const [user, setUser] = useState<User | null>(null); // yeh yh user slescted hai uska nam upar aaega (jiski chats display hongi)
   const [showAllUser, setShowAllUser] = useState(false);
@@ -39,11 +39,18 @@ const ChatApp = () => {
     }
   },[isAuth , router, loading]);
 
+  const handleLogout = ()=>{
+    logoutUser();
+  }
+
   if(loading) return <Loading />
   return (
     <div>
       <div className='min-h-screen flexx bg-gray-900 text-white relative overflow-hidden'>
-        <ChatSidebar />
+        <ChatSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}
+        showAllUsers={showAllUser} setShowAllUsers={setShowAllUser} users={users}
+        loggedInUser={loggedInUser} chats={chats} selectedUser={selectedUser}
+        setSelectedUser={setSelectedUser} handleLogout={handleLogout}/>
       </div>
     </div>
   )
