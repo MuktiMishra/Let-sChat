@@ -72,7 +72,8 @@ const VerifyOtp = () => {
             {
               email,
               otp: otpString,
-            }
+            },
+            { withCredentials: true }
           );
           toast.success(data.message);
           Cookies.set("token", data.token, {
@@ -88,8 +89,17 @@ const VerifyOtp = () => {
           fetchUsers();
 
         }
-        catch(error: any){
-          setError(error.response.data.message);
+        catch (error: any) {
+            if (error.response) {
+              // Server responded with error
+              setError(error.response.data?.message || "Something went wrong");
+            } else if (error.request) {
+              // Request was made but no response
+              setError("Server not responding. Please try again.");
+            } else {
+              // Something else
+              setError(error.message || "Unexpected error occurred");
+            }
         }
         finally{
           setLoading(false);

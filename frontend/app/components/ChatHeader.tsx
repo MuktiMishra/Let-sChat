@@ -10,7 +10,7 @@ interface ChatHeaderProps{
 }
 const ChatHeader = ({user, setSidebarOpen , isTyping}) => {
   return (
-    <>s
+    <>
     {/* Mobile menu toggle button we will show here */}
     <div className='sm:hidden fixed top-4 right-4 z-30'>
       <button className='p-3 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors'

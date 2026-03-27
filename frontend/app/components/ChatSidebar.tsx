@@ -60,7 +60,7 @@ const ChatSidebar = ({sidebarOpen, setShowAllUsers , setSidebarOpen, showAllUser
                             placeholder='Search Users...'
                             className='w-full pl-10 pr-4 py-3 bg-gray-800 border border-gray-700 text-white placeholder-gray-400' 
                             value={searchQuery}
-                            onClick={(e)=> setSearchQuery(e.target.value)}/>
+                            onChange={(e)=> setSearchQuery(e.target.value)}/>
                         </div>
 
                         {/* users list */}

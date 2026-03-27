@@ -24,7 +24,10 @@ redisClient.connect()
 .catch(console.error);
 
 const app = express();
-app.use(cors())
+app.use(cors({
+  origin: "http://localhost:3000", // your frontend
+  credentials: true
+}));
 app.use(express.json());
 app.use("/api/v1", userRoutes);
 const port = 5000;
