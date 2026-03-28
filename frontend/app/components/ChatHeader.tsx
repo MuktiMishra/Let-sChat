@@ -46,5 +46,5 @@ const ChatHeader = ({user, setSidebarOpen , isTyping}) => {
     </>
   )
 }
-
-export default ChatHeader
+//major bug fixed using with credntials
+export default ChatHeader;
