@@ -48,4 +48,4 @@ const schema = new Schema<IMessage>({
     timestamps: true,
 })
 
-export const Messages = mongoose.model<IMessage>("Meaasges", schema);
+export const Messages = mongoose.model<IMessage>("Message", schema);
