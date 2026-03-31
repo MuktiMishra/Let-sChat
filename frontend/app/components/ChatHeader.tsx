@@ -30,7 +30,7 @@ const ChatHeader = ({user, setSidebarOpen , isTyping}) => {
             {/* Online user setup - ham socket setup ke bad krenge */}
 
           </div>
-          {/* user info dikhange hm  */}
+          {/* user info dikhange hm  */} 
           <div className='flex-1 min-w-0'>
             <div className='flex items-center gap-3 mb-1'>
               <h2 className='text-2xl font-bold text-white truncate'>{user.name}</h2>
@@ -47,4 +47,5 @@ const ChatHeader = ({user, setSidebarOpen , isTyping}) => {
   )
 }
 //major bug fixed using with credntials
+
 export default ChatHeader;

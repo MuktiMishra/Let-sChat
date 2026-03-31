@@ -37,6 +37,7 @@ const ChatApp = () => {
   } = useAppData();
 
   const [selectedChat, setSelectedChat] = useState<string | null>(null);
+  
   const [message, setMessage] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [messages, setMessages] = useState<Message[] | null>(null);
@@ -133,7 +134,7 @@ const ChatApp = () => {
 
         <div className="flex-1 flex flex-col justify-between p-4 backdrop-blur-xl bg-white/5 border border-white/10">
           <ChatHeader user={user} setSidebarOpen={setSidebarOpen} isTyping={isTyping} />
-          <ChatMessages />
+          <ChatMessages selectedUser={selectedUser} messages={messages} loggedInUser={loggedInUser}/>
         </div>
 
       </div>
